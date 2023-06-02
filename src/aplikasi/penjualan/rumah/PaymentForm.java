@@ -143,10 +143,8 @@ public class PaymentForm extends javax.swing.JInternalFrame {
         inputTotalPrice.setEditable(false);
         inputTotalPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        inputDP.setEditable(false);
         inputDP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        inputJumlahCicilan.setEditable(false);
         inputJumlahCicilan.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         inputPPN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -156,6 +154,11 @@ public class PaymentForm extends javax.swing.JInternalFrame {
         jLabel15.setText("Bulan");
 
         inputAgreeCheckBox.setText("Setuju");
+        inputAgreeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputAgreeCheckBoxActionPerformed(evt);
+            }
+        });
 
         processButton.setText("PROSES");
         processButton.addActionListener(new java.awt.event.ActionListener() {
@@ -312,18 +315,58 @@ public class PaymentForm extends javax.swing.JInternalFrame {
             case 0:
                 inputPriceLand.setText("");
                 inputBuildingPrice.setText("");
+                
+                radioButton.clearSelection();
+                inputLargeLand.setText("");
+                inputTotalPrice.setText("");
+                inputAvailableLand.setText("");
+                inputDP.setText("");
+                inputCicilanPerBulan.setText("");
+                inputJumlahCicilan.setText("");
+                inputPPN.setText("");
+                inputAgreeCheckBox.setSelected(false);
                 break;
             case 1:
                 inputPriceLand.setText("500000");
                 inputBuildingPrice.setText("90000000");
+                
+                radioButton.clearSelection();
+                inputLargeLand.setText("");
+                inputTotalPrice.setText("");
+                inputAvailableLand.setText("");
+                inputDP.setText("");
+                inputCicilanPerBulan.setText("");
+                inputJumlahCicilan.setText("");
+                inputPPN.setText("");
+                inputAgreeCheckBox.setSelected(false);
                 break;
             case 2:
                 inputPriceLand.setText("600000");
                 inputBuildingPrice.setText("120000000");
+                
+                radioButton.clearSelection();
+                inputLargeLand.setText("");
+                inputTotalPrice.setText("");
+                inputAvailableLand.setText("");
+                inputDP.setText("");
+                inputCicilanPerBulan.setText("");
+                inputJumlahCicilan.setText("");
+                inputPPN.setText("");
+                inputAgreeCheckBox.setSelected(false);
                 break;
             default:
                 inputPriceLand.setText("700000");
                 inputBuildingPrice.setText("150000000");
+                
+                radioButton.clearSelection();
+                inputLargeLand.setText("");
+                inputTotalPrice.setText("");
+                inputAvailableLand.setText("");
+                inputDP.setText("");
+                inputCicilanPerBulan.setText("");
+                inputJumlahCicilan.setText("");
+                inputPPN.setText("");
+                inputAgreeCheckBox.setSelected(false);
                 break; 
         }
         
@@ -343,6 +386,11 @@ public class PaymentForm extends javax.swing.JInternalFrame {
                     totalPrice;
             totalPrice = (availableLand * landPrice) + buildingPrice;
             inputTotalPrice.setText("" + totalPrice);
+            
+            inputDP.setText("");
+            inputPPN.setText("");
+            inputJumlahCicilan.setText("");
+            inputCicilanPerBulan.setText("");
         }
     }//GEN-LAST:event_t36RadioButtonActionPerformed
 
@@ -360,6 +408,12 @@ public class PaymentForm extends javax.swing.JInternalFrame {
                     totalPrice;
             totalPrice = (availableLand * landPrice) + buildingPrice;
             inputTotalPrice.setText("" + totalPrice);
+            
+            inputDP.setText("");
+            inputPPN.setText("");
+            inputJumlahCicilan.setText("");
+            inputCicilanPerBulan.setText("");
+
         }
     }//GEN-LAST:event_t45RadioButtonActionPerformed
 
@@ -377,6 +431,11 @@ public class PaymentForm extends javax.swing.JInternalFrame {
                     totalPrice;
             totalPrice = (availableLand * landPrice) + buildingPrice;
             inputTotalPrice.setText("" + totalPrice);
+            
+            inputDP.setText("");
+            inputPPN.setText("");
+            inputJumlahCicilan.setText("");
+            inputCicilanPerBulan.setText("");
         }
     }//GEN-LAST:event_t54RadioButtonActionPerformed
 
@@ -411,14 +470,31 @@ public class PaymentForm extends javax.swing.JInternalFrame {
                     availableLand = Long.parseLong(inputAvailableLand.getText()),
                     dp = Long.parseLong(inputDP.getText()),
                     jumlahCicilan = Long.parseLong(inputJumlahCicilan.getText()),
-                    totalPrice, ppn, CicilanPerBulan:
+                    totalPrice, ppn, CicilanPerBulan;
             totalPrice = (availableLand * landPrice) + buildingPrice;
             ppn = totalPrice * 10 / 100;
-            CicilanPerBulan = (totalPrice + ppn) / JumlahCicilan;
+            CicilanPerBulan = (totalPrice + ppn) / jumlahCicilan;
             inputPPN.setText("" + ppn);
             inputCicilanPerBulan.setText("" + CicilanPerBulan);
         }
     }//GEN-LAST:event_processButtonActionPerformed
+
+    private void inputAgreeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputAgreeCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(inputOrderName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama pemesan harus diisi");
+            inputAgreeCheckBox.setSelected(false);
+        } else if(inputPPN.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Tekan tombol proses terlebih dahulu");
+            inputAgreeCheckBox.setSelected(false);
+        } else if(inputAgreeCheckBox.isSelected() == true) {
+            JOptionPane.showMessageDialog(null, "Pemesan menyetujui");
+            inputAgreeCheckBox.setSelected(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Pesanan belum disetujui");
+            inputAgreeCheckBox.setSelected(false);
+        }
+    }//GEN-LAST:event_inputAgreeCheckBoxActionPerformed
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

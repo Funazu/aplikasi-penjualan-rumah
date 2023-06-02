@@ -341,13 +341,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputDP">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputJumlahCicilan">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
@@ -370,6 +368,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Setuju"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputAgreeCheckBoxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="processButton">
       <Properties>
