@@ -80,6 +80,10 @@ public class OptionMenu extends javax.swing.JInternalFrame {
 
     private void showDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDataButtonActionPerformed
         // TODO add your handling code here:
+        DataForm dataForm = new DataForm();
+        dataForm.setVisible(true);
+        this.getDesktopPane().add(dataForm);
+        this.dispose();
     }//GEN-LAST:event_showDataButtonActionPerformed
 
 
