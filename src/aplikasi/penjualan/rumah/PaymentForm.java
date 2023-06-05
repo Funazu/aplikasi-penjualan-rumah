@@ -1,8 +1,13 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package aplikasi.penjualan.rumah;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -168,6 +173,11 @@ public class PaymentForm extends javax.swing.JInternalFrame {
         });
 
         saveButton.setText("SIMPAN");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setText("HAPUS");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -495,6 +505,45 @@ public class PaymentForm extends javax.swing.JInternalFrame {
             inputAgreeCheckBox.setSelected(false);
         }
     }//GEN-LAST:event_inputAgreeCheckBoxActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        if (inputAgreeCheckBox.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Klik Setuju Untuk Menyimpan Data", "Error ",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            String typeHouse;
+            if (t36RadioButton.isSelected()) {
+                typeHouse = "TIPE 36";
+            } else if(t45RadioButton.isSelected()) {
+                typeHouse = "TIPE 45";
+            } else {
+                typeHouse = "TIPE 54";
+            }
+            
+            try {
+                String sql = "INSERT INTO rumah (name, area, tipe, luas, harga, jumlah_cicilan, cicilan_bulan) VALUES ('"
+                        + inputOrderName.getText() + "', '"
+                        + inputAreaComboBox.getSelectedItem() + "', '"
+                        + typeHouse + "', '"
+                        + inputLargeLand.getText() + "', '"
+                        + inputTotalPrice.getText() + "', '"
+                        + inputJumlahCicilan.getText() + "', '"
+                        + inputCicilanPerBulan.getText() + "')";
+                Connection conn = (Connection) ConnectionDb.connectDatabase();
+                PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+                pst.execute();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(PaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            OptionMenu optionMenu = new OptionMenu();
+            optionMenu.setVisible(true);
+            this.getDesktopPane().add(optionMenu);
+            this.dispose();
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

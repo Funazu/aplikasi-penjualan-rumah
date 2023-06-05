@@ -35,8 +35,8 @@ public class DataForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableData = new javax.swing.JTable();
         toMenuButton = new javax.swing.JButton();
-        totalHouse = new javax.swing.JTextField();
-        totalIncome = new javax.swing.JTextField();
+        inputTotalHouse = new javax.swing.JTextField();
+        inputTotalIncome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -78,8 +78,8 @@ public class DataForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(totalIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(totalHouse))
+                    .addComponent(inputTotalIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(inputTotalHouse))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -89,11 +89,11 @@ public class DataForm extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toMenuButton)
-                    .addComponent(totalHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputTotalHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputTotalIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(0, 14, Short.MAX_VALUE))
         );
@@ -122,6 +122,18 @@ public class DataForm extends javax.swing.JInternalFrame {
                    rs.getString(4), rs.getString(5), rs.getString(6),
                    rs.getString(7), rs.getString(8)
                 });
+                long totalIncome = 0;
+                int totalHouse;
+                totalHouse = rs.getRow();
+                
+                for(int i = 0; i < totalHouse; i++) {
+                    long income = Long.parseLong((String) tableModel.getValueAt(i, 5));
+                    totalIncome += income;
+                }
+                
+                inputTotalHouse.setText("" + totalHouse);
+                inputTotalIncome.setText("" + totalIncome);
+                
             }
         } catch(SQLException ex) {
             
@@ -129,12 +141,12 @@ public class DataForm extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField inputTotalHouse;
+    private javax.swing.JTextField inputTotalIncome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableData;
     private javax.swing.JButton toMenuButton;
-    private javax.swing.JTextField totalHouse;
-    private javax.swing.JTextField totalIncome;
     // End of variables declaration//GEN-END:variables
 }

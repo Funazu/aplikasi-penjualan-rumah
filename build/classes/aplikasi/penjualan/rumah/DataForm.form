@@ -35,8 +35,8 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="totalIncome" pref="140" max="32767" attributes="0"/>
-                  <Component id="totalHouse" max="32767" attributes="0"/>
+                  <Component id="inputTotalIncome" pref="140" max="32767" attributes="0"/>
+                  <Component id="inputTotalHouse" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -49,12 +49,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="toMenuButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="totalHouse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputTotalHouse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="totalIncome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputTotalIncome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
@@ -143,9 +143,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toMenuButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="totalHouse">
+    <Component class="javax.swing.JTextField" name="inputTotalHouse">
     </Component>
-    <Component class="javax.swing.JTextField" name="totalIncome">
+    <Component class="javax.swing.JTextField" name="inputTotalIncome">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
