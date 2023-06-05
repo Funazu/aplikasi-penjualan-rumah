@@ -7,6 +7,7 @@ package aplikasi.penjualan.rumah;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  * 
@@ -18,9 +19,10 @@ public class DataForm extends javax.swing.JInternalFrame {
     /**
      * Creates new form DataForm
      */
+    String sql = "select * from rumah";
     public DataForm() {
         initComponents();
-        showTable();
+        showTable(sql);
     }
 
     /**
@@ -39,6 +41,13 @@ public class DataForm extends javax.swing.JInternalFrame {
         inputTotalIncome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        inputOrderName = new javax.swing.JTextField();
+        inputArea = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         tableData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,31 +70,80 @@ public class DataForm extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Total Penjualan");
 
+        jLabel3.setText("Cari Data");
+
+        jLabel4.setText("Nama Pemesan");
+
+        jLabel5.setText("AREA");
+
+        searchButton.setText("CARI");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setText("HAPUS");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(toMenuButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(toMenuButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputTotalIncome)
+                            .addComponent(inputTotalHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputTotalIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(inputTotalHouse))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputOrderName)
+                            .addComponent(inputArea, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(inputOrderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(inputArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toMenuButton)
@@ -95,7 +153,7 @@ public class DataForm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputTotalIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
 
         pack();
@@ -109,13 +167,43 @@ public class DataForm extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_toMenuButtonActionPerformed
 
-    public void showTable() {
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        if(inputOrderName.getText().isEmpty() && inputArea.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Masukan Data Yang Ingin di Cari", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            showTable(sql);
+        } else if (inputOrderName.getText().isEmpty()) {
+//            Kode untuk mencari berdasarkan area
+            showTable("SELECT * FROM rumah WHERE area LIKE '%"
+                    + inputArea.getText() + "%'");
+        } else if (inputArea.getText().isEmpty()) {
+//            Kode untuk mencari berdasarkan nama
+            showTable("SELECT * FROM rumah WHERE name LIKE '%"
+                                + inputOrderName.getText() + "%'");
+        } else {
+//            Kode untuk mencari  berdasarkan nama dan area
+            showTable("SELECT * FROM rumah WHERE name LIKE '%"
+                    + inputOrderName.getText() + "%' AND area LIKE '%"
+                    + inputArea.getText() + "%'");
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        inputOrderName.setText("");
+        inputArea.setText("");
+        showTable(sql);
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    public void showTable(String sql) {
         try {
             Statement stat = (Statement) ConnectionDb.connectDatabase().createStatement();
-            String sql = "select * from rumah";
             ResultSet rs = stat.executeQuery(sql);
             DefaultTableModel tableModel;
             tableModel = (DefaultTableModel)tableData.getModel();
+            tableModel.getDataVector().removeAllElements();
             while(rs.next()) {
                 tableModel.addRow(new Object[] {
                    rs.getString(1), rs.getString(2), rs.getString(3),
@@ -141,11 +229,18 @@ public class DataForm extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JTextField inputArea;
+    private javax.swing.JTextField inputOrderName;
     private javax.swing.JTextField inputTotalHouse;
     private javax.swing.JTextField inputTotalIncome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTable tableData;
     private javax.swing.JButton toMenuButton;
     // End of variables declaration//GEN-END:variables

@@ -509,7 +509,7 @@ public class PaymentForm extends javax.swing.JInternalFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         if (inputAgreeCheckBox.isSelected() == false) {
-            JOptionPane.showMessageDialog(null, "Klik Setuju Untuk Menyimpan Data", "Error ",
+            JOptionPane.showMessageDialog(rootPane, "Klik Setuju Untuk Menyimpan Data", "Error ",
                     JOptionPane.ERROR_MESSAGE);
         } else {
             String typeHouse;
